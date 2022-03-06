@@ -4,8 +4,7 @@ const constlabel = document.getElementById("pet-label")
 const inputlabel = document.getElementById("pet-input")
 const buttonlabel = document.getElementById("pet-submit")
 
-var moneyInitial = parseInt(inputlabel.value),
-moneyCount = 0;
+var moneyInitial = parseInt(inputlabel.value);
 
 function petNameUpdate() {
     moneyInitial = parseInt(inputlabel.value) + 1
