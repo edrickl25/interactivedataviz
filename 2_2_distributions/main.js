@@ -40,7 +40,7 @@ d3.json("../data/environmentRatings.json", d3.autoType)
       .call(xAxis)
 
     svg.append("g")
-      .attr("transform",`translate(0,${margin})`)
+      .attr("transform",`translate(${margin},0)`)
       .call(yAxis)  
     /* 5 - JOIN - SELECT-DATA-JOIN & DRAW */
 
