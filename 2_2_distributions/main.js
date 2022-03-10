@@ -43,6 +43,24 @@ d3.json("../data/environmentRatings.json", d3.autoType)
       .attr("transform",`translate(0,${margin})`)
       .call(yAxis)  
     /* 5 - JOIN - SELECT-DATA-JOIN & DRAW */
+
+svg.selectAll("circle")
+    .data(data)
+    .join(
+      enter => enter
+      .append("circle")
+      .attr("r",1)
+      .attr("cx", d => xScale(d.envScore2020))
+      .attr("cy", d => yScale(d.ideologyScore2020))
+      .attr("fill", "black")
+        .transition()
+        .duration(2000) // in ms
+        .delay(200)
+          .attr("r",10)
+          .attr("fill", d => colorScale(d.Party))
+
+    )
+
     /* 6 - ATTRIBUTES - */
     svg.selectAll("circle")
       .data(data)
