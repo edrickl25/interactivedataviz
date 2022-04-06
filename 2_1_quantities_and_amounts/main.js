@@ -10,15 +10,15 @@ d3.csv('../data/squirrelActivities.csv',d3.autoType).then
 
   /* SCALES */
   // xscale - categorical, activity
-  const xScale = d3.scaleBand()
+  const yScale = d3.scaleBand()
     .domain(data.map(d=> d.activity))
-    .range([margin,width]) // visual variable
+    .range([margin, height]) // visual variable
     .paddingInner(.2)
 
     // yscale - linear,count
-  const yScale = d3.scaleLinear()
+  const xScale = d3.scaleLinear()
     .domain([0, d3.max(data, d=> d.count)])
-    .range([height-margin, margin])
+    .range([margin, width-margin])
 
   /* HTML ELEMENTS */
   
@@ -28,11 +28,11 @@ d3.csv('../data/squirrelActivities.csv',d3.autoType).then
     .attr("width", width)
     .attr("height", height)
 
-  const xAxis = d3.axisBottom(xScale)
+  const xAxis = d3.axisTop(xScale)
   const yAxis = d3.axisLeft(yScale)
 
   svg.append("g")
-    .attr("transform", `translate(0,${height-margin})` )
+    .attr("transform", `translate(0,${margin})` )
     .call(xAxis)
 
   svg.append("g")
@@ -43,11 +43,12 @@ d3.csv('../data/squirrelActivities.csv',d3.autoType).then
   svg.selectAll("rect")
     .data(data)
     .join("rect")
-    .attr("width", xScale.bandwidth())
+    .attr("height", yScale.bandwidth())
 //  .attr("width", d => width - margin - xScale(d.activity))
-    .attr("height", d=> height-margin - yScale(d.count))
-    .attr("x", d=> xScale(d.activity))
-    .attr("y", d=> yScale(d.count))
+    .attr("width", d=> xScale(d.count) - margin)
+    .attr("x", margin)
+    .attr("y", d=> yScale(d.activity))
+
 
 })
 
